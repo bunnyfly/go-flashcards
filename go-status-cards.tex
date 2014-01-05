@@ -1,0 +1,437 @@
+\documentclass[12pt]{letter}
+
+\usepackage{psgo}
+\setlength{\goxunit}{.3cm} \setlength{\goyunit}{.3cm}
+
+\usepackage[
+  %paperwidth=5.5in, paperheight=3.5in, margin=0.5in, showframe,
+  paperwidth=5in, paperheight=3in, margin=0.25in,
+  ]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+
+\newcommand{\pstricks}{\textsf{PSTricks}}
+
+\title{Go Status Flashcards}
+\author{Chloe Adeline}
+\date{} % delete this line to display the current date
+
+
+%%% BEGIN DOCUMENT
+\begin{document}
+\pagenumbering{gobble} % no page numbers
+\setlength{\parindent}{0cm} % no indenting
+
+%%% \makeflashcard{front}{back}
+\newcommand{\makeflashcard}[2]{%
+  \topskip0pt\vspace*{\fill}\begin{minipage}{\textwidth}\center#1\end{minipage}\vspace*{\fill}\newpage%
+  \topskip0pt\center#2\newpage%
+}%
+
+%%% \makeflashcardwithboards
+%%%   1 - {pattern name}
+%%%   2 - {question}
+%%%   3 - {back text}
+%%%   4 - {psgo board size}
+%%%   5 - {psgo stone pattern}
+%%%   6 - {answer 1 text}
+%%%   7 - {answer 1 moves [defaults to black first]}
+%%%   8 - {answer 2 text}
+%%%   9 - {answer 2 moves [defaults to black first]}
+\newcommand{\makeflashcardwithboards}[9]{%
+  \makeflashcard{%
+    %%% FRONT
+    \setlength{\goxunit}{.4cm}\setlength{\goyunit}{.4cm}%
+    \begin{psgopartialboard*}{#4}\normalsize#5\end{psgopartialboard*}%
+    \\\LARGE#2%
+  }{%
+    %%% BACK
+    \LARGE#1\vfill\normalsize#3\vfill%
+    \ifx&#9&%
+      \ifx&#7&%
+        % 0 boards
+      \else%
+        % 1 board
+        \begin{minipage}{\textwidth} \center%
+          \begin{psgopartialboard*}{#4} \scriptsize \setcounter{gomove}{0} \setboolean{blackmove}{true}
+            #5 #7
+          \end{psgopartialboard*}\normalsize\\#6%
+        \end{minipage}%
+      \fi%
+    \else%
+      % 2 boards
+      \begin{minipage}{0.5\textwidth} \center%
+        \begin{psgopartialboard*}{#4} \scriptsize \setcounter{gomove}{0} \setboolean{blackmove}{true}
+          #5 #7
+        \end{psgopartialboard*}\normalsize\\#6%
+      \end{minipage}%
+      \begin{minipage}{0.5\textwidth} \center%
+        \begin{psgopartialboard*}{#4} \scriptsize \setcounter{gomove}{0} \setboolean{blackmove}{true}
+          #5 #9
+        \end{psgopartialboard*}\normalsize\\#8%
+      \end{minipage}%
+    \fi%
+  }
+}
+
+% DONE:
+% 4-5 Stone One Space Notcher in the Corner [Skipped a few from book.]
+% 4-7 Stone One Space Notcher on the Side
+% 4-6 Stone Rows Around the Corner
+% 4-6 Stone Rows in the Corner
+% 6-8 Stone Rows on the Side
+
+
+% 4-5 Stone One Space Notcher in the Corner
+\makeflashcardwithboards
+  {\Large4 Stone One Space Notcher in the Corner}
+  {Status?}
+  {Undecided.\\``5 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{3} \stone{black}{d}{3}
+    \stone{black}{d}{2}
+    \stone{white}{b}{3} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{d}{4}
+    \stone{white}{e}{4} \stone{white}{e}{3} \stone{white}{e}{2} \stone{white}{g}{2}
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{c}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{d}{1} \move{c}{2} }
+\makeflashcardwithboards
+  {\Large5 Stone One Space Notcher in the Corner \textsuperscript{b}}
+  {Status?}
+  {Undecided against a descent.\\``5 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{3} \stone{black}{d}{3}
+    \stone{black}{d}{2} \stone{black}{e}{2}
+    \stone{white}{b}{3} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{d}{4}
+    \stone{white}{e}{4} \stone{white}{e}{3} \stone{white}{f}{2} \stone{white}{f}{1}
+    \stone{white}{g}{3}
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{e}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{e}{1} \move{d}{1} \move{c}{1} }
+\makeflashcardwithboards
+  {\Large5 Stone One Space Notcher in the Corner \textsuperscript{a}}
+  {Status?}
+  {Alive.\\``5 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{3} \stone{black}{d}{3}
+    \stone{black}{d}{2} \stone{black}{e}{2}
+    \stone{white}{b}{3} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{d}{4}
+    \stone{white}{e}{4} \stone{white}{e}{3} \stone{white}{f}{2} \stone{white}{g}{3}
+  }
+  {White cannot kill.\\\null}
+  {\setboolean{blackmove}{false} \move{c}{1} \move{b}{1} \move{e}{1} \move{c}{2} }
+  {}
+  {}
+
+% 4-7 Stone One Space Notcher on the Side
+\makeflashcardwithboards
+  {\Large7 Stone One Space Notcher on the Side \textsuperscript{d}}
+  {Status?}
+  {Alive.\\``4 Die, 7 Live.''}
+  {(5,1)(17,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2} \stone{black}{l}{2}
+    \stone{black}{l}{3} \stone{black}{m}{3} \stone{black}{n}{2} \stone{black}{o}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{j}{3}
+    \stone{white}{k}{3} \stone{white}{l}{4} \stone{white}{m}{4} \stone{white}{n}{4}
+    \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{p}{2} \stone{white}{q}{3} 
+  }
+  {White can only get seki.\\\null}
+  {\setboolean{blackmove}{false} \move{m}{1} \move{o}{1} \move{l}{1} \move{h}{1} \move{k}{1} \move{m}{2} }
+  {}
+  {}
+\makeflashcardwithboards
+  {\Large7 Stone One Space Notcher on the Side \textsuperscript{c}}
+  {Status?}
+  {Alive.\\``4 Die, 7 Live.''}
+  {(5,1)(17,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2} \stone{black}{k}{3}
+    \stone{black}{l}{3} \stone{black}{m}{2} \stone{black}{n}{2} \stone{black}{o}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{j}{3}
+    \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{m}{4} \stone{white}{m}{3}
+    \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{p}{2} \stone{white}{q}{3} 
+  }
+  {White can only get seki.\\\null}
+  {\setboolean{blackmove}{false} \move{l}{1} \move{o}{1} \move{m}{1} \move{h}{1} \move{k}{1} \move{l}{2} }
+  {}
+  {}
+\makeflashcardwithboards
+  {\Large7 Stone One Space Notcher on the Side \textsuperscript{b}}
+  {Status?}
+  {Alive.\\``4 Die, 7 Live.''}
+  {(5,1)(17,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{j}{3} \stone{black}{k}{3}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2} \stone{black}{o}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{p}{2}
+    \stone{white}{q}{3} 
+  }
+  {White can only get seki.\\\null}
+  {\setboolean{blackmove}{false} \move{k}{1} \move{h}{1} \move{l}{1} \move{o}{1} \move{m}{1} \move{k}{2} }
+  {}
+  {}
+\makeflashcardwithboards
+  {\Large7 Stone One Space Notcher on the Side \textsuperscript{a}}
+  {Status?}
+  {Alive.\\``4 Die, 7 Live.''}
+  {(5,1)(17,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{3} \stone{black}{k}{3} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2} \stone{black}{o}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{p}{2} \stone{white}{q}{3} 
+  }
+  {White cannot kill.\\\null}
+  {\setboolean{blackmove}{false} \move{j}{1} \move{h}{1} \move{k}{1} \move{o}{1} \move{l}{1} \move{m}{1} }
+  {}
+  {}
+\makeflashcardwithboards
+  {\Large6 Stone One Space Notcher on the Side \textsuperscript{c}}
+  {Status?}
+  {Undecided.\\``4 Die, 7 Live.''}
+  {(5,1)(16,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2} \stone{black}{k}{3}
+    \stone{black}{l}{3} \stone{black}{m}{2} \stone{black}{n}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{j}{3}
+    \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{m}{4} \stone{white}{m}{3}
+    \stone{white}{n}{3} \stone{white}{o}{2} \stone{white}{p}{3} 
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{h}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{l}{1} }
+\makeflashcardwithboards
+  {\Large6 Stone One Space Notcher on the Side \textsuperscript{b}}
+  {Status?}
+  {Undecided.\\``4 Die, 7 Live.''}
+  {(5,1)(16,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{j}{3} \stone{black}{k}{3}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{3} \stone{white}{o}{2} \stone{white}{p}{3} 
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{k}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{k}{1} }
+\makeflashcardwithboards
+  {\Large6 Stone One Space Notcher on the Side \textsuperscript{a}}
+  {Status?}
+  {Undecided.\\``4 Die, 7 Live.''}
+  {(5,1)(16,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{3} \stone{black}{k}{3} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{3} \stone{white}{o}{2} \stone{white}{p}{3} 
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{j}{1} \move{n}{1} \move{m}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{j}{1} \move{h}{1} \move{n}{1} \move{m}{1} \move{k}{1} }
+\makeflashcardwithboards
+  {\Large5 Stone One Space Notcher on the Side \textsuperscript{b}}
+  {Status?}
+  {Undecided.\\``4 Die, 7 Live.''}
+  {(5,1)(15,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{j}{3} \stone{black}{k}{3}
+    \stone{black}{l}{2} \stone{black}{m}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{2} \stone{white}{o}{3} 
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{k}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{k}{1} }
+\makeflashcardwithboards
+  {\Large5 Stone One Space Notcher on the Side \textsuperscript{a}}
+  {Status?}
+  {Undecided.\\``4 Die, 7 Live.''}
+  {(5,1)(15,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{j}{3} \stone{black}{k}{3} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2}
+    \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{3} \stone{white}{n}{2} \stone{white}{o}{3} 
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{j}{1} \move{m}{1} \move{l}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{j}{1} \move{h}{1} \move{m}{1} \move{l}{1} }
+\makeflashcardwithboards
+  {4 Stone One Space Notcher on the Side}
+  {Status?}
+  {Dead.\\``4 Die, 7 Live.''}
+  {(4,1)(14,10)}
+  {
+    \stone{black}{h}{2} \stone{black}{h}{3} \stone{black}{j}{3} \stone{black}{k}{3}
+    \stone{black}{k}{2} \stone{black}{l}{2}
+    \stone{white}{e}{2} \stone{white}{g}{2} \stone{white}{g}{3} \stone{white}{h}{4}
+    \stone{white}{j}{4} \stone{white}{k}{4} \stone{white}{l}{4} \stone{white}{l}{3}
+    \stone{white}{m}{2} \stone{white}{n}{3} 
+  }
+  {Black cannot live.\\\null}
+  {\setboolean{blackmove}{true} \move{j}{1} \move{l}{1} }
+  {}
+  {}
+
+% 4-6 Stone Rows Around the Corner
+\makeflashcardwithboards
+  {6 Stone Row Around the Corner}
+  {Status?}
+  {Alive.\\Same as the straight row, ``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{b}{3} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{black}{e}{2} \stone{black}{f}{2}
+    \stone{white}{b}{6} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{c}{3}
+    \stone{white}{d}{3} \stone{white}{e}{3} \stone{white}{f}{3} \stone{white}{g}{2}
+    \stone{white}{h}{3}
+  }
+  {White cannot kill.\\\null}
+  {\setboolean{blackmove}{false} \move{f}{1} \move{e}{1} \move{a}{3} \move{a}{2} }
+  {}
+  {}
+\makeflashcardwithboards
+  {5 Stone Row Around the Corner}
+  {Status?}
+  {Unsettled.\\Same as the straight row, ``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{b}{3} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{black}{e}{2}
+    \stone{white}{b}{6} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{c}{3}
+    \stone{white}{d}{3} \stone{white}{e}{3} \stone{white}{f}{2} \stone{white}{g}{3}
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{e}{1} \move{a}{3} \move{a}{2} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{e}{1} \move{d}{1} \move{a}{3} \move{a}{2} \move{b}{1} }
+\makeflashcardwithboards
+  {4 Stone Row Around the Corner}
+  {Status?}
+  {Dead.\\Same as the straight row, ``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{b}{3} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{white}{b}{6} \stone{white}{b}{4} \stone{white}{c}{4} \stone{white}{c}{3} \stone{white}{d}{3}
+    \stone{white}{e}{2} \stone{white}{f}{3}
+  }
+  {Black cannot live.\\\null}
+  {\setboolean{blackmove}{true} \move{d}{1} \move{a}{3} \move{a}{2} \move{b}{1} }
+  {}
+  {}
+
+% 4-6 Stone Rows in the Corner
+\makeflashcardwithboards
+  {6 Stone Row in the Corner}
+  {Status?}
+  {Alive.\\``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{black}{e}{2} \stone{black}{f}{2}
+    \stone{white}{a}{3} \stone{white}{b}{3} \stone{white}{c}{3} \stone{white}{d}{3}
+    \stone{white}{e}{3} \stone{white}{f}{3} \stone{white}{g}{2} \stone{white}{h}{3}
+  }
+  {White cannot kill.\\\null}
+  {\setboolean{blackmove}{false} \move{f}{1} \move{e}{1} }
+  {}
+  {}
+\makeflashcardwithboards
+  {5 Stone Row in the Corner}
+  {Status?}
+  {Undecided.\\``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{black}{e}{2}
+    \stone{white}{a}{3} \stone{white}{b}{3} \stone{white}{c}{3} \stone{white}{d}{3}
+    \stone{white}{e}{3} \stone{white}{f}{2} \stone{white}{g}{3}
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{e}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{e}{1} \move{d}{1} \move{b}{1}}
+\makeflashcardwithboards
+  {4 Stone Row in the Corner}
+  {Status?}
+  {Dead.\\``4 Die, 6 Live.''}
+  {(1,1)(10,10)}
+  {
+    \stone{black}{a}{2} \stone{black}{b}{2} \stone{black}{c}{2} \stone{black}{d}{2}
+    \stone{white}{a}{3} \stone{white}{b}{3} \stone{white}{c}{3} \stone{white}{d}{3}
+    \stone{white}{e}{2} \stone{white}{f}{3}
+  }
+  {Black cannot live.\\\null}
+  {\setboolean{blackmove}{true} \move{d}{1} \move{b}{1}}
+  {}
+  {}
+
+% 6-8 Stone Rows on the Side
+\makeflashcardwithboards
+  {8 Stone Row on the Side}
+  {Status?}
+  {Alive.\\``6 Die, 8 Live.''}
+  {(5,1)(16,10)}
+  {
+    \stone{black}{g}{2} \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2} \stone{black}{o}{2}
+    \stone{white}{f}{2} \stone{white}{f}{3} \stone{white}{g}{3} \stone{white}{h}{3}
+    \stone{white}{j}{3} \stone{white}{k}{3} \stone{white}{l}{3} \stone{white}{m}{3}
+    \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{p}{3} \stone{white}{p}{2}
+  }
+  {White cannot kill.\\\null}
+  {\setboolean{blackmove}{false} \move{g}{1} \move{h}{1} \move{o}{1} \move{n}{1} }
+  {}
+  {}
+\makeflashcardwithboards
+  {7 Stone Row on the Side}
+  {Status?}
+  {Undecided.\\``6 Die, 8 Live.''}
+  {(5,1)(15,10)}
+  {
+    \stone{black}{g}{2} \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2} \stone{black}{n}{2}
+    \stone{white}{f}{2} \stone{white}{f}{3} \stone{white}{g}{3} \stone{white}{h}{3}
+    \stone{white}{j}{3} \stone{white}{k}{3} \stone{white}{l}{3} \stone{white}{m}{3}
+    \stone{white}{n}{3} \stone{white}{o}{3} \stone{white}{o}{2}
+  }
+  {Black can live.\\\null}
+  {\setboolean{blackmove}{true} \move{g}{1} \move{n}{1} \move{m}{1} }
+  {White can kill.\\\null}
+  {\setboolean{blackmove}{false} \move{g}{1} \move{h}{1} \move{n}{1} \move{m}{1} \move{k}{1} }
+\makeflashcardwithboards
+  {6 Stone Row on the Side}
+  {Status?}
+  {Black is dead.\\``6 Die, 8 Live.''}
+  {(5,1)(14,10)}
+  {
+    \stone{black}{g}{2} \stone{black}{h}{2} \stone{black}{j}{2} \stone{black}{k}{2}
+    \stone{black}{l}{2} \stone{black}{m}{2}
+    \stone{white}{f}{2} \stone{white}{f}{3} \stone{white}{g}{3} \stone{white}{h}{3}
+    \stone{white}{j}{3} \stone{white}{k}{3} \stone{white}{l}{3} \stone{white}{m}{3}
+    \stone{white}{n}{3} \stone{white}{n}{2}
+  }
+  {Black cannot live.\\\null}
+  {\setboolean{blackmove}{true} \move{g}{1} \move{m}{1} \move{l}{1} \move{j}{1} }
+  {}
+  {}
+
+\end{document}
