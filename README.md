@@ -22,6 +22,6 @@ Tools and Sources
 This is done with TeX and the [psgo](http://www.ctan.org/tex-archive/graphics/pstricks/contrib/psgo/) package.
 
 I run this command in Vim to compile the pdf:
-    :w|!latex go-status-cards.tex && dvipdf go-status-cards.dvi
+`:w|!latex go-status-cards.tex && dvipdf go-status-cards.dvi`
 
 Most but not all of the shapes are taken from **Life and Death** by James Davies. I've stuck with the most identifiable and common shapes, and expanded upon them to include the most common alive, dead, and unsettled variations.
